@@ -5,18 +5,28 @@ class Dashboard extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        // Load any necessary models or libraries here
+        $this->load->model('M_admin');
+
+        if (!$this->session->userdata('username')) {
+            redirect('Auth');
+        }
     }
 
     public function index() {
+        $username = $this->session->userdata('username');
+        $data = [];
         // Load any data you want to pass to the view
-        $data = array();
+        // $admin_data = $this->M_admin->get_admin_by_username($username);
+
+        $data['data_admin'] = $this->M_admin->get_admin_by_username($username);
+        // $data = array();
 
         // Load the view
-        $this->load->view('templates/dashboard_header', $data);
-        $this->load->view('templates/dashboard_sidebar', $data);   
-        $this->load->view('templates/dashboard_navbar', $data);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);   
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('templates/alerts', $data);
         $this->load->view('v_dashboard/index', $data);
-        $this->load->view('templates/dashboard_footer', $data);
+        $this->load->view('templates/footer', $data);
     }
 }

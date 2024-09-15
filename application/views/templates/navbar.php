@@ -18,8 +18,8 @@
                     <div class="image">
                         <img src="<?php echo base_url('assets/dist/img/PustakaProfile.png'); ?>" class="img-circle" alt="User Image" style="width: 35px; height: 35px; object-fit: cover;">
                     </div>
-                    <div class="info"> 
-                        <span class="d-block">Admin Pustaka Syabab</span>
+                    <div class="info">
+                        <span class="d-block"><?php echo isset($data_admin['nama_admin']) ? $data_admin['nama_admin'] : ''; ?></span>
                     </div>
                 </div>
             </a>
@@ -28,7 +28,7 @@
                     <i class="fas fa-user mr-2"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="" class="dropdown-item">
+                <a href="<?php echo base_url('Auth/logout'); ?>" class="dropdown-item">
                     <i class="fas fa-sign-out-alt mr-2"></i> Log Out
                 </a>
             </div>
@@ -36,4 +36,3 @@
     </ul>
 </nav>
 <!-- /.navbar -->
-
