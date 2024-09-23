@@ -1,6 +1,7 @@
 </div>
 <!-- /.content-wrapper -->
 
+<!-- Footer -->
 <!-- <footer class="main-footer" style="margin-top: 62px;">
   <div class="float-right d-none d-sm-block">
   </div>
@@ -13,57 +14,69 @@
 </aside>
 <!-- /.control-sidebar -->
 
-</div>
-<!-- ./wrapper -->
+<!-- Bootstrap Bundle (Termasuk Popper.js) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 
-<!-- jQuery -->
-<script src="<?php echo base_url(); ?>/assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<?php echo base_url(); ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>/assets/dist/js/adminlte.min.js"></script>
+
 <!-- overlayScrollbars -->
 <script src="<?php echo base_url(); ?>/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
 <!-- ChartJS -->
 <script src="<?php echo base_url(); ?>/assets/plugins/chart.js/Chart.min.js"></script>
-<!-- Include Cropper JS -->
+
+<!-- Cropper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-<!-- jQuery Mapael -->
-<script src="<?php echo base_url(); ?>/assets/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="<?php echo base_url(); ?>/assets/plugins/raphael/raphael.min.js"></script>
-<script src="<?php echo base_url(); ?>/assets/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="<?php echo base_url(); ?>/assets/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+
+<!-- Bootstrap Icon Picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-iconpicker/1.10.0/js/bootstrap-iconpicker.bundle.min.js"></script>
+
+<!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-    // Menghilangkan alert setelah 3 detik
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-            $(this).remove();
-        });
-    }, 3000);
-</script>
+<script src="<?php echo base_url(); ?>/assets/plugins/summernote/summernote-bs4.min.js"></script>
 
 <script>
-function confirmDelete(url, message = 'Apakah Anda yakin ingin menghapus data ini?') {
-    // Panggil SweetAlert2 dengan pesan khusus
+  // Menghilangkan alert setelah 3 detik
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 3000);
+
+  // Inisialisasi Icon Picker
+  $(document).ready(function() {
+    $('#iconPicker').iconpicker({
+      align: 'center',
+      placement: 'bottomRight',
+      hideOnSelect: true
+    });
+
+    $('#iconPickerButton').click(function() {
+      $('#iconPicker').iconpicker('toggle');
+    });
+  });
+
+  // SweetAlert untuk konfirmasi penghapusan
+  function confirmDelete(url, message = 'Apakah Anda yakin ingin menghapus data ini?') {
     Swal.fire({
-        title: 'Konfirmasi Penghapusan',
-        text: message,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus',
-        cancelButtonText: 'Batal'
+      title: 'Konfirmasi Penghapusan',
+      text: message,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Hapus',
+      cancelButtonText: 'Batal'
     }).then((result) => {
-        if (result.isConfirmed) {
-            // Jika pengguna konfirmasi, redirect ke URL yang diberikan
-            window.location.href = url;
-        }
+      if (result.isConfirmed) {
+        window.location.href = url;
+      }
     })
-}
+  }
 </script>
+
 
 <script>
     $(document).ready(function() {

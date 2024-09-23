@@ -35,7 +35,7 @@
 
         <li class="nav-header">Kelola Produk</li>
 
-        <li class="nav-item <?php echo ($this->uri->segment(1) == 'Kategori') ? 'menu-open' : ''; ?>">
+        <li class="nav-item <?php echo ($this->uri->segment(1) == 'Kategori' || $this->uri->segment(1) == 'Subkategori') ? 'menu-open' : ''; ?>">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-list-alt"></i>
             <p>
@@ -46,13 +46,13 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="<?php echo base_url('Kategori') ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'Kategori') ? 'active' : ''; ?>">
-                <i class="fas fa-layer-group nav-icon ml-3"></i>
+                <i class="fas fa-layer-group nav-icon"></i>
                 <p>Kategori</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('Subkategori') ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'Subkategori') ? 'active' : ''; ?> ">
-                <i class="fas fa-layer-group nav-icon ml-3"></i>
+                <i class="fas fa-layer-group nav-icon"></i>
                 <p>Sub Kategori</p>
               </a>
             </li>
@@ -69,48 +69,25 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?php echo base_url('Buku/tambah') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'tambah') ? 'active' : ''; ?>">
-                <i class="fas fa-plus nav-icon ml-3"></i>
+              <a href="<?php echo base_url('Buku/create') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'create') ? 'active' : ''; ?>">
+                <i class="fas fa-plus nav-icon"></i>
                 <p>Tambah Buku</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url('Buku/kelola') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'kelola') ? 'active' : ''; ?>">
-                <i class="fas fa-edit nav-icon ml-3"></i>
-                <p>Kelola Buku</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url('Buku/stok') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'stok') ? 'active' : ''; ?>">
-                <i class="fas fa-warehouse nav-icon ml-3"></i>
-                <p>Stok Buku</p>
+              <a href="<?php echo base_url('Buku/index') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'index' || $this->uri->segment(2) == 'edit' || $this->uri->segment(2) == 'detail') ? 'active' : ''; ?>">
+                <i class="fas fa-book-open nav-icon"></i>
+                <p>Daftar Buku</p>
               </a>
             </li>
           </ul>
         </li>
 
-        <li class="nav-item <?php echo ($this->uri->segment(1) == 'Slider') ? 'menu-open' : ''; ?>">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-images"></i>
-            <p>
-              Slider
-              <i class="right fas fa-angle-left"></i>
-            </p>
+        <li class="nav-item">
+          <a href="<?php echo base_url('Stok'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'Stok') ? 'active' : ''; ?>">
+            <i class="fas fa-warehouse nav-icon"></i>
+            <p>Stok</p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?php echo base_url('Slider/tambah') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'tambah') ? 'active' : ''; ?>">
-                <i class="fas fa-plus nav-icon ml-3"></i>
-                <p>Tambah Slider</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url('Slider/kelola') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'kelola') ? 'active' : ''; ?>">
-                <i class="fas fa-edit nav-icon ml-3"></i>
-                <p>Kelola Slider</p>
-              </a>
-            </li>
-          </ul>
         </li>
 
         <li class="nav-header">Kelola Pesanan</li>
@@ -126,31 +103,31 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="<?php echo base_url('Pesanan/masuk') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'masuk') ? 'active' : ''; ?>">
-                <i class="fas fa-inbox nav-icon ml-3"></i>
+                <i class="fas fa-inbox nav-icon"></i>
                 <p>Pesanan Masuk</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('Pesanan/konfirmasi') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'konfirmasi') ? 'active' : ''; ?>">
-                <i class="fas fa-check nav-icon ml-3"></i>
+                <i class="fas fa-check nav-icon"></i>
                 <p>Pesanan Di Konfirmasi</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('Pesanan/kemas') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'kemas') ? 'active' : ''; ?>">
-                <i class="fas fa-box nav-icon ml-3"></i>
+                <i class="fas fa-box nav-icon"></i>
                 <p>Pesanan Di Kemas</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('Pesanan/kirim') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'dikirim') ? 'active' : ''; ?>">
-                <i class="fas fa-shipping-fast nav-icon ml-3"></i>
+                <i class="fas fa-shipping-fast nav-icon"></i>
                 <p>Pesanan Dikirim</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('Pesanan/selesai') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'selesai') ? 'active' : ''; ?>">
-                <i class="fas fa-clipboard-check nav-icon ml-3"></i>
+                <i class="fas fa-clipboard-check nav-icon"></i>
                 <p>Pesanan Selesai</p>
               </a>
             </li>
@@ -164,6 +141,30 @@
         </li>
 
         <li class="nav-header">Pengaturan</li>
+
+        <li class="nav-item <?php echo ($this->uri->segment(1) == 'Slider') ? 'menu-open' : ''; ?>">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-images"></i>
+            <p>
+              Slider
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo base_url('Slider/tambah') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'tambah') ? 'active' : ''; ?>">
+                <i class="fas fa-plus nav-icon"></i>
+                <p>Tambah Slider</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('Slider/kelola') ?>" class="nav-link <?php echo ($this->uri->segment(2) == 'kelola') ? 'active' : ''; ?>">
+                <i class="fas fa-edit nav-icon"></i>
+                <p>Kelola Slider</p>
+              </a>
+            </li>
+          </ul>
+        </li>
 
         <li class="nav-item">
           <a href="<?php echo base_url('User'); ?>" class="nav-link <?php echo ($this->uri->segment(1) == 'User') ? 'active' : ''; ?>">

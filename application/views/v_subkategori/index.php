@@ -5,7 +5,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="<?= site_url('Dashboard'); ?>">Home</a></li>
-                <li class="breadcrumb-item active">Kategori</li>
+                <li class="breadcrumb-item active">Sub-Kategori</li>
             </ol>
         </div>
     </div>
@@ -15,13 +15,13 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <!-- Tabel Daftar Kategori -->
+            <!-- Tabel Daftar Subkategori -->
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Daftar Kategori</h3>
+                        <h3 class="card-title">Daftar Sub-Kategori</h3>
                         <div class="card-tools">
-                            <form action="<?php echo base_url('Kategori'); ?>" method="get">
+                            <form action="<?php echo base_url('Subkategori'); ?>" method="get">
                                 <div class="input-group input-group-sm" style="width: 300px;">
                                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search" value="<?php echo $this->input->get('table_search', TRUE); ?>">
                                     <div class="input-group-append">
@@ -37,27 +37,29 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover">
-                                <thead>
+                                <thead class="text-center">
                                     <tr>
                                         <th style="width: 5%;">No.</th>
                                         <th style="width: 17%;">Nama Kategori</th>
+                                        <th style="width: 21%;">Nama Sub-Kategori</th>
                                         <th>Keterangan</th>
-                                        <th class="text-center">Aksi</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($data_kategori) && is_array($data_kategori)): ?>
-                                        <?php foreach ($data_kategori as $index => $kategori): ?>
-                                            <?php if (is_object($kategori)): ?>
+                                    <?php if (!empty($data_subkategori) && is_array($data_subkategori)): ?>
+                                        <?php foreach ($data_subkategori as $index => $subkategori): ?>
+                                            <?php if (is_object($subkategori)): ?>
                                                 <tr>
                                                     <td><?= htmlspecialchars($index + 1); ?></td>
-                                                    <td><?= htmlspecialchars($kategori->nama_kategori); ?></td> <!-- Pastikan ini objek -->
-                                                    <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?= htmlspecialchars($kategori->keterangan); ?></td> <!-- Pastikan ini objek -->
+                                                    <td><?= htmlspecialchars($subkategori->nama_kategori); ?></td> <!-- Pastikan ini objek -->
+                                                    <td><?= htmlspecialchars($subkategori->nama_subkategori); ?></td> <!-- Pastikan ini objek -->
+                                                    <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?= htmlspecialchars($subkategori->keterangan); ?></td>
                                                     <td class="text-center">
-                                                        <button type="button" class="btn btn-info btn-sm text-light" data-toggle="modal" data-target="#editModal" onclick="loadEditForm(<?= htmlspecialchars($kategori->id_kategori); ?>)">
+                                                        <button type="button" class="btn btn-info btn-sm text-light" data-toggle="modal" data-target="#editModal" onclick="loadEditForm(<?= htmlspecialchars($subkategori->id_subkategori); ?>)">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-danger btn-sm" title="Delete" onclick="confirmDelete('<?= site_url('Kategori/destroy/' . $kategori->id_kategori); ?>', 'Apakah Anda yakin ingin menghapus kategori ini?')">
+                                                        <button type="button" class="btn btn-danger btn-sm" title="Delete" onclick="confirmDelete('<?= site_url('Subkategori/destroy/' . $subkategori->id_subkategori); ?>', 'Apakah Anda yakin ingin menghapus kategori ini?')">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </td>
@@ -66,9 +68,10 @@
                                         <?php endforeach; ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="4">Data kategori tidak ditemukan.</td>
+                                            <td colspan="4">Data Sub-Kategori tidak ditemukan.</td>
                                         </tr>
                                     <?php endif; ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -77,20 +80,31 @@
             </div>
 
             <!-- Form Tambah Kategori -->
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Kategori Baru</h3>
+                        <h3 class="card-title">Tambah Sub-Kategori Baru</h3>
                     </div>
                     <div class="card-body">
-                        <form id="addForm" method="post" action="<?= site_url('Kategori/add'); ?>">
+                        <form id="addForm" method="post" action="<?= site_url('Subkategori/add'); ?>">
                             <div class="form-group">
-                                <label for="nama_kategori">Nama Kategori</label>
-                                <input type="text" name="nama_kategori" class="form-control" placeholder="Nama Kategori" required>
+                                <label for="id_kategori">Nama Kategori</label>
+                                <select name="id_kategori" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Kategori</option>
+                                    <?php foreach ($data_kategori as $kategori): ?>
+                                        <option value="<?= htmlspecialchars($kategori->id_kategori); ?>">
+                                            <?= htmlspecialchars($kategori->nama_kategori); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_subkategori">Nama Subkategori</label>
+                                <input type="text" name="nama_subkategori" class="form-control" placeholder="Nama Sub-kategori" required>
                             </div>
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
-                                <textarea name="keterangan" class="form-control" rows="3" required></textarea>
+                                <textarea name="keterangan" class="form-control" rows="3" placeholder="Keterangan kategori" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
@@ -106,7 +120,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Kategori</h5>
+                <h5 class="modal-title" id="editModalLabel">Edit Subkategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -120,10 +134,10 @@
 
 <script>
     // Load form edit kategori sampah
-    function loadEditForm(id_kategori) {
-        console.log('Loading form for Kategori ID:', id_kategori);
+    function loadEditForm(id_subkategori) {
+        console.log('Loading form for Subkategori ID:', id_subkategori);
         $.ajax({
-            url: '<?= site_url('Kategori/edit/') ?>' + id_kategori,
+            url: '<?= site_url('Subkategori/edit/') ?>' + id_subkategori,
             type: 'GET',
             success: function(data) {
                 console.log('AJAX success:', data);
@@ -136,4 +150,9 @@
             }
         });
     }
+
+    // Reset form on modal close
+    $(document).ready(function() {
+        $('#addForm')[0].reset();
+    });
 </script>

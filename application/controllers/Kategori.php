@@ -41,31 +41,37 @@ class Kategori extends CI_Controller
 
     // Tambah kategori baru
     public function add()
-    {
-        // Validasi form
-        $this->form_validation->set_rules('nama_kategori', 'Nama Kategori', 'required');
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
+{
+    // Validasi form
+    $this->form_validation->set_rules('nama_kategori', 'Nama Kategori', 'required');
+    $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
-        // Jika validasi gagal, tetap berada di halaman index dengan pesan error
-        if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata('error', validation_errors());
-        } else {
-            $data = [
-                'nama_kategori' => htmlspecialchars($this->input->post('nama_kategori')),
-                'keterangan' => htmlspecialchars($this->input->post('keterangan'))
-            ];
-            $this->M_kategori->insert_kategori($data);
-            $this->session->set_flashdata('success', 'Kategori berhasil ditambahkan!');
-        }
-
-        redirect('Kategori');
+    // Jika validasi gagal, tetap berada di halaman index dengan pesan error
+    if ($this->form_validation->run() == FALSE) {
+        $this->session->set_flashdata('error', validation_errors());
+    } else{
+        $nama_kategori = $this->input->post('nama_kategori');
+        $keterangan = $this->input->post('keterangan');
+        
+        // Simpan data jika tidak ada masalah
+        $data = [
+            'nama_kategori' => htmlspecialchars($nama_kategori),
+            'keterangan' => htmlspecialchars($keterangan)
+        ];
+        $this->M_kategori->insert_kategori($data);
+        $this->session->set_flashdata('success', 'Kategori berhasil ditambahkan!');
     }
+
+    redirect('Kategori');
+}
+
 
     // Edit kategori
     public function edit($id_kategori)
     {
         $data['kategori'] = $this->M_kategori->get_kategori_by_id($id_kategori);
 
+        // $this->form_validation->set_rules('kategori_icon', 'Icon Kategori', 'required');
         $this->form_validation->set_rules('nama_kategori', 'Nama Kategori', 'required');
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
@@ -73,6 +79,7 @@ class Kategori extends CI_Controller
             $this->load->view('v_kategori/edit', $data);
         } else {
             $update_data = [
+                // 'kategori_icon' => $this->input->post('kategori_icon'),
                 'nama_kategori' => $this->input->post('nama_kategori'),
                 'keterangan' => $this->input->post('keterangan')
             ];
